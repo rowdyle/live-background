@@ -8,6 +8,7 @@ you nead a the right size of a vidue for that depends on your resoltion
 you nead to dawnlowd cv2 and pyqt5
 
 pip install pyqt5
+
 pip install opencv-python
 
 

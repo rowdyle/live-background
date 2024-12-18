@@ -12,4 +12,4 @@ pip install pyqt5
 pip install opencv-python
 
 
-and you nead to change in the backgrond.py the path to the video you want to live, it in the top after the imports
+and you nead to change in the backgrond.py the path to the video you want to live, it in the top after the imports its nead full root

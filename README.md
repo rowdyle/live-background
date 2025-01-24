@@ -6,6 +6,7 @@ you nead to dawnlowd cv2 and pyqt5
 1. pres win + r
 2. write cmd
 3. paste the commend below:
+
 pip install pyqt5
 pip install opencv-python
 

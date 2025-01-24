@@ -1,9 +1,5 @@
 worke on windows 10,11
-
-
-this is a visual studio 2022 code in py that make a live wallpaper 
-you nead a the right size of a vidue for that depends on your resoltion
-
+worke on 1/2 monitors (didnt check on 3 but it will probly bee ez to do it for more to)
 
 you nead to dawnlowd cv2 and pyqt5
 

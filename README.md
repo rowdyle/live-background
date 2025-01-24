@@ -8,9 +8,10 @@ you nead to dawnlowd cv2 and pyqt5
 3. paste the commend below:
 
 pip install pyqt5
+
 pip install opencv-python
 
-
+<br>
 and you nead to change in the backgrond.py the path to the video you want to live, it in the top after the imports its nead full root ("c:/path/to/your.mp4")
 
 if you want to make it run with out the cli you nead to change the end of the file to .pyw

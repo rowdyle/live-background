@@ -3,8 +3,10 @@ worke on 1/2 monitors (didnt check on 3 but it will probly bee ez to do it for m
 
 you nead to dawnlowd cv2 and pyqt5
 
+1. pres win + r
+2. write cmd
+3. paste the commend below:
 pip install pyqt5
-
 pip install opencv-python
 
 

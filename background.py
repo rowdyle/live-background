@@ -9,7 +9,7 @@ name = "C:/Users/rowdy/Videos/background/d2.mp4"  # Path to your video
 x_offset = 0  # Only if there is an offset
 y_offset = 0
 time_wait_ml = 15
-screen_off_time = 600 #secends
+screen_off_time = 300 #secends
 
 class VideoPlayer(QMainWindow):
     def __init__(self, video_path, time_wait_ml, x_offset=0, y_offset=0):

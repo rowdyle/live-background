@@ -5,7 +5,7 @@ from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtWidgets import QMainWindow, QApplication, QLabel
 from PyQt5.QtGui import QPixmap, QImage
 
-name = "C:/Users/rowdy/Videos/background/d2.mp4"  # Path to your video
+name = "C:/path/to/your.mp4"  # Path to your video
 x_offset = 0  # Only if there is an offset
 y_offset = 0
 time_wait_ml = 15

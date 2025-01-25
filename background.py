@@ -170,7 +170,7 @@ class VideoPlayer(QMainWindow):
 
         # Try to get information about the display
         if self.get_idle_time():
-            False
+            return False
 
         # Check if it's not fullscreen
         if not self.on_size(top):

@@ -55,9 +55,9 @@ class VideoPlayer(QMainWindow):
                 x = self.xgap + screen_geometry.x()
 
             if screen_geometry.y() < 0:
-                y = 0 - int(screen_geometry.height()/2) 
+                y = 0 
             else:
-                y = self.ygap + screen_geometry.y() - int(screen_geometry.height()/2)
+                y = self.ygap + screen_geometry.y()
 
             label.move(x ,y) 
             self.labels.append(label)

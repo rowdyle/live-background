@@ -2,17 +2,16 @@ import sys
 import cv2
 import ctypes
 from PyQt5.QtCore import Qt, QTimer
-from PyQt5.QtWidgets import QMainWindow, QApplication, QLabel
+from PyQt5.QtWidgets import QMainWindow, QApplication, QDesktopWidget, QLabel
 from PyQt5.QtGui import QPixmap, QImage
 
-name = "C:/path/to/your.mp4"  # Path to your video
-x_offset = 0  # Only if there is an offset
-y_offset = 0
-time_wait_ml = 15
+name = "C:/path/to/your.mp4" #change it to you video path. make sure the / is in the rigt dir, its need to be like this / and not like this \
+y_offset = 0 #if the video is too up change it to 1
+time_wait_ml = 30
 screen_off_time = 300 #how macth secends after idle its stop 
 
 class VideoPlayer(QMainWindow):
-    def __init__(self, video_path, time_wait_ml, x_offset=0, y_offset=0):
+    def __init__(self, video_path, time_wait_ml, y_offset):
         super().__init__()
 
         # Variables for all the functions
@@ -46,8 +45,10 @@ class VideoPlayer(QMainWindow):
         # Create a QLabel for each screen
         x = 0
         for screen in self.screens:
-            label = QLabel(self)
             screen_geometry = screen.geometry()
+            if y_offset != 0:
+                y_offset = screen_geometry.y()/2
+            label = QLabel(self)
             label.resize(self.total_width, self.total_height)
             if screen_geometry.x() < 0:
                 x = 0
@@ -55,9 +56,9 @@ class VideoPlayer(QMainWindow):
                 x = self.xgap + screen_geometry.x()
 
             if screen_geometry.y() < 0:
-                y = 0 
+                y = 0 - y_offset
             else:
-                y = self.ygap + screen_geometry.y()
+                y = self.ygap + screen_geometry.y() - y_offset
 
             label.move(x ,y) 
             self.labels.append(label)
@@ -65,7 +66,7 @@ class VideoPlayer(QMainWindow):
         self.setWindowFlags(Qt.FramelessWindowHint)  # No border
 
         # Set the background window
-        self.set_background_window(x_offset, y_offset)
+        self.set_background_window(y_offset)
 
         # Create the video update timer
         self.timer = QTimer(self)
@@ -99,7 +100,7 @@ class VideoPlayer(QMainWindow):
         else:
             self.cap.set(cv2.CAP_PROP_POS_FRAMES, 0)  # Restart the video
 
-    def set_background_window(self, x_offset, y_offset):
+    def set_background_window(self, y_offset):
         """Set the WorkerW window as a background window and make it a child of the main window."""
         FindWindowExW = self.user32.FindWindowExW  # shortcut
         hwnd = None
@@ -200,11 +201,11 @@ def frame_to_pixmap(frame):
     return QPixmap.fromImage(q_image)
 
 #---------------------------------------------------------------------------------
-def main(video_path, time_wait_ml, x_offset=0, y_offset=0):
+def main(video_path, time_wait_ml, y_offset):
     app = QApplication(sys.argv)
-    player = VideoPlayer(video_path, time_wait_ml, x_offset, y_offset)  # Make the window with PyQt5
+    player = VideoPlayer(video_path, time_wait_ml, y_offset)  # Make the window with PyQt5
     sys.exit(app.exec_())
 #---------------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    main(name, time_wait_ml, x_offset, y_offset)  # Adjust these values as needed
+    main(name, time_wait_ml, y_offset)  # Adjust these values as needed

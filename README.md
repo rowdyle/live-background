@@ -1,4 +1,4 @@
-worke on windows 10,11. <br>
+worke on windows 10. <br>
 worke on 1/2 monitors (didnt check on 3 but it will probly bee ez to do it for more to). <br>
 have a power save mode when the background is not visbale.
 

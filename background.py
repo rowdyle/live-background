@@ -5,8 +5,8 @@ from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtWidgets import QMainWindow, QApplication, QDesktopWidget, QLabel
 from PyQt5.QtGui import QPixmap, QImage
 
-name = "C:/path/to/your.mp4" #change it to you video path. make sure the / is in the rigt dir, its need to be like this / and not like this \
-y_offset = 0 #if the video is too up change it to 1
+name = "C:/Users/User/Pictures/gifs/corgi-sleeping.mp4"
+y_offset = 1 #if the video is too up change it to 1
 time_wait_ml = 30
 screen_off_time = 300 #how macth secends after idle its stop 
 
@@ -38,16 +38,18 @@ class VideoPlayer(QMainWindow):
         self.xgap = abs(min([screen.geometry().x() for screen in self.screens]))
         self.ygap = abs(min([screen.geometry().y() for screen in self.screens]))
 
+
         # Resize the QMainWindow to cover all monitors
         self.resize(self.total_width, self.total_height )
         self.move(0, 0)  # Position the window at the top-left corner
 
         # Create a QLabel for each screen
         x = 0
-        for screen in self.screens:
-            screen_geometry = screen.geometry()
+        ls = len(self.screens)
+        for i in range(ls):
+            screen_geometry = self.screens[i].geometry()
             if y_offset != 0:
-                y_offset = screen_geometry.y()/2
+                y_offset = self.screens[ls -1-i].geometry().height()//2
             label = QLabel(self)
             label.resize(self.total_width, self.total_height)
             if screen_geometry.x() < 0:
@@ -88,9 +90,10 @@ class VideoPlayer(QMainWindow):
                 scale_width = screen_geometry.width() / frame_width
                 scale_height = screen_geometry.height() / frame_height
 
-                scale_factor = max(scale_width, scale_height)
-                new_width = int(frame_width * scale_factor)
-                new_height = int(frame_height * scale_factor)
+                #print (scale_width,scale_height)
+
+                new_width = int(frame_width * scale_width)
+                new_height = int(frame_height * scale_height)
 
                 resized_frame = cv2.resize(frame, (new_width, new_height), interpolation=cv2.INTER_LINEAR)
 

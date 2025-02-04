@@ -6,7 +6,7 @@ from PyQt5.QtWidgets import QMainWindow, QApplication, QDesktopWidget, QLabel
 from PyQt5.QtGui import QPixmap, QImage
 
 name = "C:/Users/User/Pictures/gifs/corgi-sleeping.mp4"
-y_offset = 1 #if the video is too up change it to 1
+multy_monitors = 0 #if you have more then 1 monitor put 1 in heare
 time_wait_ml = 30
 screen_off_time = 300 #how macth secends after idle its stop 
 
@@ -211,4 +211,4 @@ def main(video_path, time_wait_ml, y_offset):
 #---------------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    main(name, time_wait_ml, y_offset)  # Adjust these values as needed
+    main(name, time_wait_ml, multy_monitors)  # Adjust these values as needed

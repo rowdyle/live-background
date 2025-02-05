@@ -15,8 +15,7 @@ and you nead to change in the backgrond.py the path to the video you want to liv
 <br> <br>
 if you want to make it run with out the cli you nead to change the end of the file to .pyw <br>
 if you want it to run when you boot follow this steps:
-
-
+<br>
 1. press win + r
 2. wirte shell:startup
 3. paste the py file in this folder

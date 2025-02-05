@@ -6,7 +6,7 @@ from PyQt5.QtWidgets import QMainWindow, QApplication, QDesktopWidget, QLabel
 from PyQt5.QtGui import QPixmap, QImage
 
 name = "C:/pth/to/your.mp4" # make shure the '/' is the right '/'
-time_wait_ml = 30
+time_wait_ml = 30  # the speed of the video the slower the video the higher the value.
 screen_off_time = 300 #how macth secends after idle its stop 
 
 class VideoPlayer(QMainWindow):

@@ -5,8 +5,7 @@ from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtWidgets import QMainWindow, QApplication, QDesktopWidget, QLabel
 from PyQt5.QtGui import QPixmap, QImage
 
-name = "C:/Users/User/Pictures/gifs/corgi-sleeping.mp4"
-multy_monitors = 0 #if you have more then 1 monitor put 1 in heare
+name = "C:/pth/to/your.mp4" # make shure the '/' is the right '/'
 time_wait_ml = 30
 screen_off_time = 300 #how macth secends after idle its stop 
 

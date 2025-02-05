@@ -10,7 +10,7 @@ time_wait_ml = 30
 screen_off_time = 300 #how macth secends after idle its stop 
 
 class VideoPlayer(QMainWindow):
-    def __init__(self, video_path, time_wait_ml, y_offset):
+    def __init__(self, video_path, time_wait_ml):
         super().__init__()
 
         # Variables for all the functions
@@ -30,6 +30,7 @@ class VideoPlayer(QMainWindow):
         self.app = QApplication.instance()
         self.screens = QApplication.screens()
         self.labels = []
+        y_offset = len(self.screens) - 1
 
         # Calculate the total width and height across all screens
         self.total_width = sum([screen.geometry().width() for screen in self.screens])
@@ -203,11 +204,11 @@ def frame_to_pixmap(frame):
     return QPixmap.fromImage(q_image)
 
 #---------------------------------------------------------------------------------
-def main(video_path, time_wait_ml, y_offset):
+def main(video_path, time_wait_ml):
     app = QApplication(sys.argv)
-    player = VideoPlayer(video_path, time_wait_ml, y_offset)  # Make the window with PyQt5
+    player = VideoPlayer(video_path, time_wait_ml)  # Make the window with PyQt5
     sys.exit(app.exec_())
 #---------------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    main(name, time_wait_ml, multy_monitors)  # Adjust these values as needed
+    main(name, time_wait_ml)  # Adjust these values as needed

@@ -3,7 +3,7 @@ worke on 1/2 monitors (didnt check on 3 but it will probly bee ez to do it for m
 have a power save mode when the background is not visbale.
 
 you nead to dawnlowd cv2 and pyqt5:
-1. pres win + r
+1. press win + r
 2. write cmd
 3. paste the commends below:
 
@@ -14,6 +14,6 @@ and you nead to change in the backgrond.py the path to the video you want to liv
 <br> <br>
 if you want to make it run with out the cli you nead to change the end of the file to .pyw <br>
 if you want it to run when you boot floow this steps:
-1. pres win + r
+1. press win + r
 2. wirte shell:startup
 3. paste the py file in this folder

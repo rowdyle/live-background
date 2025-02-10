@@ -108,7 +108,7 @@ class VideoPlayer(QMainWindow):
         FindWindowExW = self.user32.FindWindowExW  # shortcut
         hwnd = None
         progman = self..user32.FindWindowW("Progman", None)
-        self..user32.SendMessageTimeoutW(progman, 0x052C, 0, 0, 0, 1000, None)
+        self.user32.SendMessageTimeoutW(progman, 0x052C, 0, 0, 0, 1000, None)
 
         # Get the WorkerW background window
         while True:

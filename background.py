@@ -5,7 +5,7 @@ from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtWidgets import QMainWindow, QApplication, QDesktopWidget, QLabel
 from PyQt5.QtGui import QPixmap, QImage
 
-name = "orgi-sleeping.mp4" # make sure the '/' is the right '/' "c:/path/to/your.mp4
+name = "corgi-sleeping.mp4" # make sure the '/' is the right '/' "c:/path/to/your.mp4
 time_wait_ml = 30  # the speed of the video. the slower the video the higher the value.
 screen_off_time = 300 #how many secends after idle the video stop 
 
@@ -109,7 +109,7 @@ class VideoPlayer(QMainWindow):
         hwnd = None
 
         # clearing the workerw window for us
-        progman = self..user32.FindWindowW("Progman", None)
+        progman = self.user32.FindWindowW("Progman", None)
         self.user32.SendMessageTimeoutW(progman, 0x052C, 0, 0, 0, 1000, None)
 
         # Get the WorkerW background window

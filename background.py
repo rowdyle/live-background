@@ -104,9 +104,11 @@ class VideoPlayer(QMainWindow):
             self.cap.set(cv2.CAP_PROP_POS_FRAMES, 0)  # Restart the video
 
     def set_background_window(self, y_offset):
-        """Set the WorkerW window as a background window and make it a child of the main window."""
+        #Set the WorkerW window as a background window and make it a child of the main window.
         FindWindowExW = self.user32.FindWindowExW  # shortcut
         hwnd = None
+
+        # clearing the workerw window for us
         progman = self..user32.FindWindowW("Progman", None)
         self.user32.SendMessageTimeoutW(progman, 0x052C, 0, 0, 0, 1000, None)
 

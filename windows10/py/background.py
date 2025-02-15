@@ -84,21 +84,9 @@ class VideoPlayer(QMainWindow):
             # Resize the frame for each screen
             for label, screen in zip(self.labels, self.screens):
                 screen_geometry = screen.geometry()
-                frame_height, frame_width, _ = frame.shape
-
-                # Scale the frame to fit the screen
-                scale_width = screen_geometry.width() / frame_width
-                scale_height = screen_geometry.height() / frame_height
-
-                #print (scale_width,scale_height)
-
-                new_width = int(frame_width * scale_width)
-                new_height = int(frame_height * scale_height)
-
-                resized_frame = cv2.resize(frame, (new_width, new_height), interpolation=cv2.INTER_LINEAR)
 
                 # Convert to QPixmap and set to QLabel
-                pixmap = QPixmap(frame_to_pixmap(resized_frame))
+                pixmap = QPixmap(frame_to_pixmap(frame, screen_geometry.width(),screen_geometry.height()))
                 label.setPixmap(pixmap)
         else:
             self.cap.set(cv2.CAP_PROP_POS_FRAMES, 0)  # Restart the video
@@ -107,10 +95,6 @@ class VideoPlayer(QMainWindow):
         #Set the WorkerW window as a background window and make it a child of the main window.
         FindWindowExW = self.user32.FindWindowExW  # shortcut
         hwnd = None
-
-        # clearing the workerw window for us
-        progman = self.user32.FindWindowW("Progman", None)
-        self.user32.SendMessageTimeoutW(progman, 0x052C, 0, 0, 0, 1000, None)
 
         # Get the WorkerW background window
         while True:
@@ -199,20 +183,33 @@ class VideoPlayer(QMainWindow):
         else:
             self.update()
 
-def frame_to_pixmap(frame):
-    """Convert an OpenCV frame to a QPixmap."""
-    frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    height, width, channels = frame_rgb.shape
-    bytes_per_line = channels * width
-    q_image = QImage(frame_rgb.data, width, height, bytes_per_line, QImage.Format_RGB888)
+def frame_to_pixmap(frame, target_width, target_height):
+    #Convert an OpenCV frame to a QPixmap, resizing while maintaining aspect ratio and cropping excess.
+    h, w = frame.shape[:2]
+
+    # Calculate the new size while maintaining aspect ratio
+    rito = max((target_height / h),(target_width / w))
+    new_width = int(w * rito) + 1
+    new_height = int(h * rito) + 1
+
+    # Resize while keeping aspect ratio
+    resized_frame = cv2.resize(frame, (new_width, new_height), interpolation=cv2.INTER_LINEAR)
+
+    # Crop the image to fit the target size (centered crop)
+    x_offset = (new_width - target_width) // 2 if new_height > target_width else 0
+    y_offset = (new_height - target_height) // 2 if new_height > target_height else 0
+
+    cropped_frame = resized_frame[y_offset:y_offset + target_height, x_offset:x_offset + target_width]
+
+    # Convert to RGB and then to QPixmap
+    frame_rgb = cv2.cvtColor(cropped_frame, cv2.COLOR_BGR2RGB)
+    q_image = QImage(frame_rgb.data, target_width, target_height, frame_rgb.strides[0], QImage.Format_RGB888)
     return QPixmap.fromImage(q_image)
 
-#---------------------------------------------------------------------------------
 def main(video_path, time_wait_ml):
     app = QApplication(sys.argv)
     player = VideoPlayer(video_path, time_wait_ml)  # Make the window with PyQt5
     sys.exit(app.exec_())
-#---------------------------------------------------------------------------------
 
 if __name__ == "__main__":
     main(name, time_wait_ml)  # Adjust these values as needed
